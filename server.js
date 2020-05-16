@@ -7,12 +7,15 @@ app.use(bodyParser.json()); // Cant send full parser, but specific method. Sets 
 app.use(router);
 
 router.get('/message', function( req, res ) {
+    console.info(req.headers);
+    res.header({
+        "custom-header": "This is my custom header!"
+    })
     res.send('Messages list');
 });
 
 router.delete('/message', function( req, res ) {
     //console.info(req.query);
-    console.info(req.body);
     res.send('Message "'+req.body.text+'" deleted');
 });
 
