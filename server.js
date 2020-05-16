@@ -27,7 +27,7 @@ router.post('/message', function( req, res ) {
     if( !req.query.error ) {
         response.success(req, res, 'Message correclty created', 201);
     } else {
-        response.error(req, res, 'Message could not be created');
+        response.error(req, res, 'Message could not be created', 500, 'Internal error reason');
     }
 });
 
