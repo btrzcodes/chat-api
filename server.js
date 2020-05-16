@@ -1,5 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+
+const response = require('./network/response');
+
 const router = express.Router();
 
 const app = express();
@@ -7,18 +10,24 @@ app.use(bodyParser.json()); // Cant send full parser, but specific method. Sets 
 app.use(router);
 
 router.get('/message', function( req, res ) {
-    console.info(req.headers);
+    //console.info(req.headers);
     res.header({
         "custom-header": "This is my custom header!"
     })
-    res.send('Messages list');
+    // res.send('Messages list');
+    response.success(req, res, 'Messages list');
 });
 
 router.post('/message', function( req, res ) {
-    res.status(201).send({
-        errors:'', 
-        message:'Message correclty created'
-    });
+    // res.status(201).send({
+    //     errors:'', 
+    //     message:'Message correclty created'
+    // });
+    if( !req.query.error ) {
+        response.success(req, res, 'Message correclty created', 201);
+    } else {
+        response.error(req, res, 'Message could not be created');
+    }
 });
 
 router.delete('/message', function( req, res ) {
