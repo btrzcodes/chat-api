@@ -6,8 +6,9 @@ const response = require('./network/response');
 const router = express.Router();
 
 const app = express();
-app.use(bodyParser.json()); // Cant send full parser, but specific method. Sets content-types, it can be .urlenconded(extended:false) to send it as form
 app.use(router);
+app.use(bodyParser.json()); // Cant send full parser, but specific method. Sets content-types, it can be .urlenconded(extended:false) to send it as form
+app.use('/app', express.static('public'));
 
 router.get('/message', function( req, res ) {
     //console.info(req.headers);
