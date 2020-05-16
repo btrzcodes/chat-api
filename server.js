@@ -14,9 +14,17 @@ router.get('/message', function( req, res ) {
     res.send('Messages list');
 });
 
+router.post('/message', function( req, res ) {
+    res.status(201).send({
+        errors:'', 
+        message:'Message correclty created'
+    });
+});
+
 router.delete('/message', function( req, res ) {
     //console.info(req.query);
-    res.send('Message "'+req.body.text+'" deleted');
+    // res.send('Message "'+req.body.text+'" deleted');
+    res.status(204).send(); // As returning no content
 });
 
 app.listen(3000);
