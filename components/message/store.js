@@ -18,10 +18,20 @@ function addMessage(message){
 
 async function getMessage() {
     //return list;
-    return allMessages = await MessageModel.find();
+    return await MessageModel.find();
+}
+
+async function updateText(id,message){
+    const foundMessage = await MessageModel.findOne({
+        _id: id
+    });
+    foundMessage.message = message;
+
+    return await foundMessage.save();
 }
 
 module.exports = {
     add: addMessage,
-    list: getMessage
+    list: getMessage,
+    edit: updateText
 }

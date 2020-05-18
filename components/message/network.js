@@ -26,8 +26,18 @@ router.get('/', function( req, res ) {
         });
 });
 
-router.delete('/', function( req, res ) {
-    res.status(204).send();
+router.patch('/:id', function(req, res) {
+    controller.updateMessage(req.params.id, req.body.message)
+        .then( data => {
+            response.success(req, res, data, 200);
+        })
+        .catch( err => {
+            response.error(req,res, 'Internal error', 500, err)
+        })
 });
+
+// router.delete('/', function( req, res ) {
+//     res.status(204).send();
+// });
 
 module.exports = router;

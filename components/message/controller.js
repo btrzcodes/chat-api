@@ -13,17 +13,27 @@ function addMessage(user, message) {
         store.add(fullMessage);
 
         resolve(fullMessage);
-    });
-    
+    });   
 }
 
 function getMessages() {
     return new Promise((resolve,reject) => {
-        resolve(store.list());
+        resolve( store.list() );
+    })
+}
+
+function updateMessage(id, message) {
+    return new Promise(async (resolve,reject) => {
+        if(!id || !message){
+            reject('Invalid Data');
+            return false;
+        }
+        resolve( await store.edit(id, message) ); 
     })
 }
 
 module.exports = {
     addMessage,
-    getMessages
+    getMessages,
+    updateMessage
 }
