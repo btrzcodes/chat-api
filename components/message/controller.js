@@ -16,9 +16,9 @@ function addMessage(user, message) {
     });   
 }
 
-function getMessages() {
+function getMessages(filterUser) {
     return new Promise((resolve,reject) => {
-        resolve( store.list() );
+        resolve( store.list(filterUser) );
     })
 }
 
@@ -26,7 +26,7 @@ function updateMessage(id, message) {
     return new Promise(async (resolve,reject) => {
         if(!id || !message){
             reject('Invalid Data');
-            return false;
+            return false; // TODO refactor: is this necesary after a reject?
         }
         resolve( await store.edit(id, message) ); 
     })

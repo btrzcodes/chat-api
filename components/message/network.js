@@ -17,7 +17,8 @@ router.post('/', function( req, res ) {
 });
 
 router.get('/', function( req, res ) {
-    controller.getMessages()
+    const filterMessagesByUser = req.query.user || null;
+    controller.getMessages(filterMessagesByUser)
         .then( (messagesList) => {
             response.success(req, res, 'Messages correclty displayed', 200, messagesList);
         })

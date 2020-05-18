@@ -16,9 +16,9 @@ function addMessage(message){
     theMessage.save();   
 }
 
-async function getMessage() {
-    //return list;
-    return await MessageModel.find();
+async function getMessage(filterUser) {
+    filterUser ? filter = {user: filterUser} : filter = {};
+    return await MessageModel.find(filter);
 }
 
 async function updateText(id,message){
