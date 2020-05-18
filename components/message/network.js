@@ -19,16 +19,11 @@ router.post('/', function( req, res ) {
 router.get('/', function( req, res ) {
     controller.getMessages()
         .then( (messagesList) => {
-            response.success(req, res, 'Message correclty created', 201, messagesList);
+            response.success(req, res, 'Messages correclty displayed', 200, messagesList);
         })
         .catch((err) => {
             response.error(req, res, 'Unexpected error', 500, err);
         });
-
-    // res.header({
-    //     "custom-header": "This is my custom header!"
-    // })
-    // response.success(req, res, 'Messages list');
 });
 
 router.delete('/', function( req, res ) {
