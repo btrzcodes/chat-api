@@ -1,8 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+//const util = require('util')
 
 const dotenv = require('dotenv');
 dotenv.config();
+
+const db = require('./db');
+//console.log(util.inspect(dbConnection, false, null, true))
+db.dbConnection();
 
 const router = require('./network/routes');
 
