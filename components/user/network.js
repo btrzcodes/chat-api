@@ -28,7 +28,7 @@ router.get('/', function( req, res ) {
 });
 
 router.patch('/:id', function(req, res) {
-    controller.updateUser(req.params.id, req.body.user)
+    controller.updateUser(req.params.id, req.body.name)
         .then( data => {
             response.success(req, res, data, 200);
         })

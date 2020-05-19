@@ -1,8 +1,9 @@
 const UserModel = require('./model');
+// TODO better manage mongo db .save() errors
 
-function addUser(user){
+async function addUser(user){
     const theUser = new UserModel(user);
-    theUser.save();   
+    return await theUser.save(); 
 }
 
 async function getUser(filterUser) {
@@ -14,9 +15,9 @@ async function updateUser(id,user){
     const foundUser = await UserModel.findOne({
         _id: id
     });
-    foundUser.user = user;
+    foundUser.name = user;
 
-    return await foundUser.save();
+    return foundUser.save();
 }
 
 async function removeUser(id) {

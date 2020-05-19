@@ -1,29 +1,30 @@
 const store = require('./store');
-
-function addUser(name) {
-    if(!name){
+// TODO: better manage errors as now assumes db returns no err?
+async function addUser(name) {
+     if(!name){
         return Promise.reject('No user name specified')
     }
     const user = {name};
-    return Promise.resolve(store.add(user));
+    return await store.add( user)
+    //await store.add(user)  
 }
 
 function getUsers(filterUser) {
     return Promise.resolve( store.list(filterUser) );
 }
 
-async function updateUser(id) {
-    if(!id){
-        return Promise.reject('No ID given');
+async function updateUser(id, user) {
+    if(!id || !user ){
+        return Promise.reject('Not enought info given');
     }
-    return Promise.resolve( await store.edit(id) ); 
+    return Promise.resolve( store.edit(id, user) ); 
 }
 
 function deleteUser(id){
     if(!id){
         return Promise.reject('No ID given');
     }
-    return Promise.resolve(store.remove(id));
+    return Promise.resolve( store.remove(id) );
 }
 
 module.exports = {
