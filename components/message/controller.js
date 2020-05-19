@@ -26,7 +26,6 @@ function updateMessage(id, message) {
     return new Promise(async (resolve,reject) => {
         if(!id || !message){
             reject('Invalid Data');
-            return false; // TODO refactor: is this necesary after a reject?
         }
         resolve( await store.edit(id, message) ); 
     })
@@ -36,7 +35,6 @@ function deleteMessage(id){
     return new Promise((resolve,reject) => {
         if(!id){
             reject('Invalid ID');
-            return false;
         }
         store.remove(id)
             .then( deletedMessage => {

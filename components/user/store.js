@@ -19,8 +19,8 @@ async function updateUser(id,user){
     return await foundUser.save();
 }
 
-function removeUser(id) {
-    return UserModel.deleteOne({
+async function removeUser(id) {
+    return await UserModel.deleteOne({
         _id: id
     })
 }
