@@ -7,7 +7,17 @@ function addMessage(message){
 
 async function getMessage(filterUser) {
     filterUser ? filter = {user: filterUser} : filter = {};
-    return await MessageModel.find(filter);
+
+    // Uses promise instead of await to manage populated object. This will fail with data created before related objectId schema!
+    return new Promise((resolve,reject) => {
+        return MessageModel
+            .find(filter)
+            .populate('user')
+            .exec( (error, populated) => {
+                if (error) { reject(error) }
+                resolve( populated )
+            })
+    })
 }
 
 async function updateText(id,message){
