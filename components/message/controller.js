@@ -40,7 +40,7 @@ function deleteMessage(id){
         }
         store.remove(id)
             .then( deletedMessage => {
-                resolve(deleteMessage);
+                resolve(deletedMessage);
             })
             .catch( err => {
                 reject(err);
