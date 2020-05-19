@@ -37,8 +37,14 @@ router.patch('/:id', function(req, res) {
         })
 });
 
-// router.delete('/', function( req, res ) {
-//     res.status(204).send();
-// });
+router.delete('/:id', function( req, res ) {
+    controller.deleteMessage(req.params.id)
+        .then( () => {
+            response.success(req, res, `User ${req.params.id} deleted!`, 204);
+        })
+        .catch( err => {
+            response.error(req,res, 'Internal error while deleting', 500, err)
+        })
+});
 
 module.exports = router;
