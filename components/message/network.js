@@ -1,13 +1,19 @@
 const express = require('express');
+const multer = require('multer');
+
 const router = express.Router();
 
 const controller = require('./controller')
 const response = require('../../network/response');
 
-router.post('/', function( req, res ) {
+const upload = multer({
+    dest: 'uploads/'
+})
+
+router.post('/', upload.single('file'), function( req, res ) {
     let body = req.body;
 
-    controller.addMessage(body.user, body.message)
+    controller.addMessage(body.user, body.message, body.chat)
         .then( (fullMessage) => {
             response.success(req, res, 'Message correclty created', 201, body);
         })

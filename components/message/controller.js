@@ -1,13 +1,14 @@
 const store = require('./store');
 
-function addMessage(user, message) {
+function addMessage(user, message, chat) {
     return new Promise( (resolve, reject) => {
-        if(!user || !message){
-            return reject('No user or message recieved')
+        if(!user || !message || !chat ){
+            return reject('Missing required info')
         }
         const fullMessage = {
             user,
             message,
+            chat,
             date: new Date()
         };
         store.add(fullMessage);
