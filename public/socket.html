@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <script src="/socket.io/socket.io.js"></script>
+    </head>
+    <body>
+        <h1>Hey, ptsch ptsch!</h1>
+        <pre>Check your console! There are secret communications on it!</pre>
+        <script>
+            var socket = io.connect(
+                    'http://localhost:3000',
+                    {forceNew: true} // Allways forces a new connection
+                );
+
+            socket.on('message', function(data){
+                console.log(data); // This data is the server message @ index.js thrown by .emmit
+            });
+        </script>
+    </body>
+</html>
