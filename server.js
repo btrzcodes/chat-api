@@ -3,6 +3,7 @@ const app = express();
 const server = require('http').Server(app);
 
 const router = require('./network/routes');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const socket = require('./socket');
 //const util = require('util')
@@ -13,6 +14,8 @@ const db = require('./db');
 
 //console.log(util.inspect(dbConnection, false, null, true))
 db.dbConnection();
+
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
