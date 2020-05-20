@@ -1,15 +1,22 @@
 const store = require('./store');
 
-function addMessage(user, message, chat) {
+function addMessage(user, message, chat, file) {
     return new Promise( (resolve, reject) => {
         if(!user || !message || !chat ){
             return reject('Missing required info')
         }
+
+        let fileUrl;
+        file ? 
+            fileUrl = ''+ file.filename
+            : fileUrl = '';
+
         const fullMessage = {
             user,
             message,
             chat,
-            date: new Date()
+            date: new Date(),
+            file: fileUrl
         };
         store.add(fullMessage);
 

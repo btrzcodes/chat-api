@@ -7,15 +7,14 @@ const controller = require('./controller')
 const response = require('../../network/response');
 
 const upload = multer({
-    dest: 'uploads/'
+    dest: 'public/files'
 })
 
 router.post('/', upload.single('file'), function( req, res ) {
     let body = req.body;
-
-    controller.addMessage(body.user, body.message, body.chat)
+    controller.addMessage(body.user, body.message, body.chat, req.file)
         .then( (fullMessage) => {
-            response.success(req, res, 'Message correclty created', 201, body);
+            response.success(req, res, 'Message correclty created', 201, fullMessage);
         })
         .catch((err) => {
             response.error(req, res, 'Message could not be created', 400, err);

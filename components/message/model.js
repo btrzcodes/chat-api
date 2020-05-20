@@ -15,6 +15,7 @@ const messageSchema = new Schema({
         type: Schema.ObjectId,
         ref: 'Chat'
     },
+    file : String,
     date: Date
 });
 
